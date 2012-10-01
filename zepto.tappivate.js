@@ -1,7 +1,7 @@
 /*!
- * Touchivate jQuery / Zepto plugin
+ * Tappivate Zepto plugin
  * Makes your mobile tappable buttons and lists feel a little more native-y
- * The perfect companion to Zepto's touch module
+ * The perfect companion to Zepto's touch module, also compatible with jQuery.
  * Author: @fiznool
  * Licensed under the MIT license
  *
@@ -9,34 +9,33 @@
 
 ;(function ( $, window, document, undefined ) {
 
-  // Default delays
-  var listItemActivationDelay = 150;
-  var buttonDeactivationDelay = 100;
+  var defaults = {
+    listItemActivationDelay: 150,
+    buttonDeactivationDelay: 100,
+    onActivate: function($el) {
+      $el.addClass('active');
+    },
+    onDeactivate: function($el) {
+      $el.removeClass('active');
+    }
+  };
 
   // A base handler which shares common functionaity for buttons and lists
-  var Handler = function(options) {
-    this.delay = options.delay;
+  var Handler = function() {
     this.timerId = null;
-    this.active = false;
   };
 
   Handler.prototype.activate = function($el) {
-    if (!this.active) {
-      $el.addClass('active');
-      this.active = true;
-    }
+    this.onActivate($el);
   };
 
   Handler.prototype.deactivate = function($el) {
-    if (this.active) {
-      $el.removeClass('active');
-      this.active = false;
-    }
+    this.onDeactivate($el);
   };
 
   Handler.prototype.cancelTimeout = function() {
     if (this.timerId) {
-        clearTimeout(this.timerId);
+      clearTimeout(this.timerId);
     }
   };
 
@@ -56,9 +55,13 @@
   Handler.prototype.touchend = function($el) {};
 
   
-  var ButtonHandler = function() {};
+  var ButtonHandler = function(options) {
+    this.delay = options.delay || defaults.buttonDeactivationDelay;
+    this.onActivate = options.activate || defaults.onActivate;
+    this.onDeactivate = options.deactivate || defaults.onDeactivate;
+  };
 
-  ButtonHandler.prototype = new Handler({ delay: buttonDeactivationDelay });
+  ButtonHandler.prototype = new Handler();
   
   ButtonHandler.prototype.touchstart = function($el) {
     this.cancelDelay(function() { this.activate($el); });
@@ -70,9 +73,13 @@
   };
 
 
-  var ListHandler = function() {};
+  var ListHandler = function(options) {
+    this.delay = options.delay || defaults.listItemActivationDelay;
+    this.onActivate = options.activate || defaults.onActivate;
+    this.onDeactivate = options.deactivate || defaults.onDeactivate;
+  };
 
-  ListHandler.prototype = new Handler({ delay: listItemActivationDelay });
+  ListHandler.prototype = new Handler();
 
   ListHandler.prototype.touchstart = function($el) {
     var that = this;
@@ -87,10 +94,13 @@
     this.cancelDelay(function() { this.deactivate($el); });
   };
 
-  var buttonHandler = new ButtonHandler();
-  var listHandler = new ListHandler();
+  
+  $.fn.tappivate = function(options) {
 
-  $.fn.touchivate = function() {
+    options = options || {};
+
+    var buttonHandler = new ButtonHandler(options);
+    var listHandler = new ListHandler(options);
 
     // Use jQuery.on with the passed in parent element to match
     // all children with the selector passed as the second parameter.
@@ -125,4 +135,4 @@
 
   };
 
-})( window.jQuery || window.Zepto, window, document );
+})( window.Zepto || window.jQuery, window, document );
