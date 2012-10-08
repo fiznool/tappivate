@@ -4,11 +4,11 @@ Ever thought your buttons and lists in your mobile web app feel a bit _clunky_? 
 
 ## What is this?
 
-Native mobile apps are built with the iOS/Android/WP SDK, which provides a rich  set of UI components. These components have been optimised to work well won touchscreen devices.
+Native mobile apps are built with the iOS/Android/WP SDK, which provides a rich  set of UI components. These components have been optimised to work well on touchscreen devices.
 
-Mobile web apps, on the other hand, suffer from a lack of a mobile SDK. As a result, UI components have not bee optimised for touchscreen devices and can often feel clunky.
+Mobile web apps, on the other hand, suffer from a lack of a mobile SDK. As a result, UI components have not been optimised for touchscreen devices and can often feel clunky.
 
-Tappivate is a small Zepto (or jQuery0 plugin which aims to emulate the behaviour of two UI components, buttons and lists, in an attempt to make them feel more responsive.
+Tappivate is a small Zepto (or jQuery) plugin which aims to emulate the behaviour of two UI components, buttons and lists, in an attempt to make them feel more responsive.
 
 ## How does it do that?
 
