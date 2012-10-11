@@ -155,3 +155,7 @@ tappivate uses Zepto/jQuery delegated events to ensure that all buttons/lists wi
 ## Where is this used?
 
 It has already been used in production, as part of the [Mobile Backbone Boilerplate](https://github.com/fiznool/mobile-backbone-boilerplate) library. There are probably bugs, though - pull requests are welcome.
+
+## I want some more!
+
+More details on why I wrote this plugin can be found on [my blog](http://fiznool.com/blog/2012/10/11/tappivate-dot-js/).
