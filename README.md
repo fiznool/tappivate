@@ -27,9 +27,9 @@ OK... the following code adds tappivate's functionality to all children of `cont
     <li>Item 3</li>
   </ul>
   <ul data-tap="list nav">
-    <li>Nav 1</li>
-    <li>Nav 2</li>
-    <li>Nav 3</li>
+    <li>Nav Link 1</li>
+    <li>Nav Link 2</li>
+    <li>Nav Link 3</li>
   </ul>
 </div>
 ```
