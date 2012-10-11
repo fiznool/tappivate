@@ -22,14 +22,14 @@ OK... the following code adds tappivate's functionality to all children of `cont
 <div id="container">
   <button data-tap="btn">Tap Me!</button>
   <ul data-tap="list">
-    <li>Scroll Me!</li>
-    <li>Scroll Me!</li>
-    <li>Scroll Me!</li>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
   </ul>
   <ul data-tap="list nav">
-    <li>Scroll Me!</li>
-    <li>Scroll Me!</li>
-    <li>Scroll Me!</li>
+    <li>Nav 1</li>
+    <li>Nav 2</li>
+    <li>Nav 3</li>
   </ul>
 </div>
 ```
@@ -48,6 +48,8 @@ Tappivate searches for buttons and lists marked up with a `data-tap` attribute. 
 These rules are designed to match native buttons and lists. For more information on this, check out [Aanand Prasad's article on jquery.tappable](http://aanandprasad.com/articles/jquery-tappable/).
 
 ### Button
+
+`<button data-tap="btn">Tap Me!</button>`
 
 <table>
   <thead>
@@ -75,33 +77,19 @@ When touched, a button will instantly add an `active` class. When the touch ends
 
 ### List
 
-<table>
-  <thead>
-    <tr>
-      <th>Event</th>
-      <th>Action</th>
-      <th>Delay (ms)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>touchstart</code></td>
-      <td><code>addClass('active')</code></td>
-      <td>150</td>
-    </tr>
-    <tr>
-      <td><code>touchmove</code></td>
-      <td><code>removeClass('active')</code></td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
+There are two types of lists: regular list and navigation lists.
 
-A list item will not become active the instant it is touched, instead it will wait for a short period of time (150ms) to see if a touchmove (scroll) is registered. A touchmove will prevent the list item being highlighted, otherwise after a short delay the list item will be highlighted on touchstart.
+#### Regular List
 
-A regular list item remains highlighted to indicate that the selection is chosen, even after touchend.
+```
+<ul data-tap="list">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ul>
+```
 
-### Nav
+This type of list remains active even after a touchend. This is useful in the case where the entire list will be removed from the DOM after an item is tapped, e.g. if you are building a full-page list view which transitions to a full-page detail view.
 
 <table>
   <thead>
@@ -128,6 +116,37 @@ A regular list item remains highlighted to indicate that the selection is chosen
 A list item will not become active the instant it is touched, instead it will wait for a short period of time (150ms) to see if a touchmove (scroll) is registered. A touchmove will prevent the list item being highlighted, otherwise after a short delay the list item will be highlighted on touchstart.
 
 A regular list item remains highlighted to indicate that the selection is chosen, even after touchend.
+
+#### Navigation List
+
+```
+<ul data-tap="list nav">
+  <li>Nav 1</li>
+  <li>Nav 2</li>
+  <li>Nav 3</li>
+</ul>
+```
+
+An extension to a regular list, a nav list adds the touchend handler to deactivate a list item when it is tapped. This is useful for static navigation lists which remain in the DOM, e.g. a fixed nav bar at the top of a page.
+
+A nav list should be targeted with a regular list `data-tap` attribute too, to ensure the touchmove on scrolling is present.
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Action</th>
+      <th>Delay (ms)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>touchend</code></td>
+      <td><code>removeClass('active')</code></td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Delegated Events
 
