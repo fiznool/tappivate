@@ -21,10 +21,15 @@ OK... the following code adds tappivate's functionality to all children of `cont
 ```
 <div id="container">
   <button data-tap="btn">Tap Me!</button>
-  <ul>
-    <li data-tap="list">Scroll Me!</li>
-    <li data-tap="list">Scroll Me!</li>
-    <li data-tap="list">Scroll Me!</li>
+  <ul data-tap="list">
+    <li>Scroll Me!</li>
+    <li>Scroll Me!</li>
+    <li>Scroll Me!</li>
+  </ul>
+  <ul data-tap="list nav">
+    <li>Scroll Me!</li>
+    <li>Scroll Me!</li>
+    <li>Scroll Me!</li>
   </ul>
 </div>
 ```
@@ -38,7 +43,7 @@ Check out [the demo page](http://fiznool.github.com/tappivate/example.html) on a
 
 ## What does this all do?
 
-Tappivate searches for buttons and list items marked up with a `data-tap` attribute. Once it finds these elements, it applies the following rules to each, based on touch events on the element. 
+Tappivate searches for buttons and lists marked up with a `data-tap` attribute. Once it finds these elements, it applies the following rules to each, based on touch events on the element. 
 
 These rules are designed to match native buttons and lists. For more information on this, check out [Aanand Prasad's article on jquery.tappable](http://aanandprasad.com/articles/jquery-tappable/).
 
@@ -69,6 +74,34 @@ These rules are designed to match native buttons and lists. For more information
 When touched, a button will instantly add an `active` class. When the touch ends, the class is retained for a short period of time (100ms) to provide the user with feedback that the button was tapped once his/her finger is removed from the screen.
 
 ### List
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Action</th>
+      <th>Delay (ms)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>touchstart</code></td>
+      <td><code>addClass('active')</code></td>
+      <td>150</td>
+    </tr>
+    <tr>
+      <td><code>touchmove</code></td>
+      <td><code>removeClass('active')</code></td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+A list item will not become active the instant it is touched, instead it will wait for a short period of time (150ms) to see if a touchmove (scroll) is registered. A touchmove will prevent the list item being highlighted, otherwise after a short delay the list item will be highlighted on touchstart.
+
+A regular list item remains highlighted to indicate that the selection is chosen, even after touchend.
+
+### Nav
 
 <table>
   <thead>

@@ -121,15 +121,15 @@
       buttonHandler.touchend($(this));
     });
 
-    this.on('touchstart', '[data-tap~="list"]', function() {
+    this.on('touchstart', '[data-tap~="list"] > li', function() {
       listHandler.touchstart($(this));
     });
 
-    this.on('touchmove', '[data-tap~="list"]', function() {
+    this.on('touchmove', '[data-tap~="list"] > li', function() {
       listHandler.touchmove($(this));
     });
 
-    this.on('touchend', '[data-tap~="nav"]', function() {
+    this.on('touchend', '[data-tap~="nav"] > li', function() {
       listHandler.touchend($(this));
     });
 
