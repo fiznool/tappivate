@@ -57,17 +57,33 @@
       margin-left: 0.5em;
     }
 
+    h2 {
+      font-size: 18px;
+    }
+
     #nav {
       background-color: #6F5B31;
       color: #f0f0f0;
       padding: 5px;
+      width: 100%;
     }
 
     #navbar {
       height: 34px;
       line-height: 34px;
-      font-size: 1.2em;
-      text-align: right;
+      clear: both;
+    }
+
+    #navbar-title {
+      float:left;
+      margin: 0;
+      font-size: 20px;
+      padding-left: 10px;
+    }
+
+    #navbar-menu {
+      float: right;
+      font-size: 16px;
     }
 
     #menu-arrow {
@@ -77,6 +93,8 @@
     #navlist {
       display: none;
       font-size: 90%;
+      border-top: 1px solid #999;
+      margin-top: 10px;
     }
 
     #navlist li.active {
@@ -89,7 +107,10 @@
 <body>
   <div id="container">
     <div id="nav">
-      <div id="navbar">Menu <span id="menu-arrow">&#x25BC;</span></div>
+      <div id="navbar">
+        <h1 id="navbar-title">tappivate.js</h1>
+        <div id="navbar-menu">Menu <span id="menu-arrow">&#x25BC;</span></div>
+      </div>
       <div id="navlist">
         <h2>I am a Navigation List. Try tapping & scrolling me.</h2>
         <ul data-tap="list nav">
@@ -180,6 +201,7 @@
       var tmplDetail = $('#tmpl-detail');
 
       var destroyAll = function() {
+        $navlist.hide();
         $list.hide();
         $list.empty();
         $detail.hide();

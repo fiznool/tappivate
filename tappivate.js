@@ -117,7 +117,7 @@
       buttonHandler.touchstart($(this));
     });
 
-    this.on('touchend', '[data-tap~="btn"]', function() {
+    this.on('touchend touchleave touchcancel', '[data-tap~="btn"]', function() {
       buttonHandler.touchend($(this));
     });
 
@@ -129,7 +129,7 @@
       listHandler.touchmove($(this));
     });
 
-    this.on('touchend', '[data-tap~="nav"] > li', function() {
+    this.on('touchend touchleave touchcancel', '[data-tap~="nav"] > li', function() {
       listHandler.touchend($(this));
     });
 
