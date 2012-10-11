@@ -6,11 +6,21 @@
   <title>Tappivate Example</title>
   <style>
     * { 
-      -webkit-tap-highlight-color: rgba(0,0,0,0); 
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
     }
 
     #container {
       min-width: 280px;
+    }
+
+    .inset {
+      margin: 0 5px;
     }
 
     button {
@@ -30,35 +40,74 @@
       margin-top: 20px;
     }
 
-    #list ul {
+    ul {
       padding: 0;
     }
 
-    #list li {
+    li {
       list-style: none;
       margin: 0;
       padding: 10px 5px;
       border-bottom: 1px solid #999;
     }
 
-    #list li:after {
+    li:after {
       content: ">";
       float:right;
       margin-left: 0.5em;
+    }
+
+    #nav {
+      background-color: #6F5B31;
+      color: #f0f0f0;
+      padding: 5px;
+    }
+
+    #navbar {
+      height: 34px;
+      line-height: 34px;
+      font-size: 1.2em;
+      text-align: right;
+    }
+
+    #menu-arrow {
+      font-size: 80%;
+    }
+
+    #navlist {
+      display: none;
+      font-size: 90%;
+    }
+
+    #navlist li.active {
+      background: #f0f0f0;
+      color: #6F5B31;
     }
 
   </style>
 </head>
 <body>
   <div id="container">
-    <div id="list"></div>
-    <div id="detail"></div>
+    <div id="nav">
+      <div id="navbar">Menu <span id="menu-arrow">&#x25BC;</span></div>
+      <div id="navlist">
+        <h2>I am a Navigation List. Try tapping & scrolling me.</h2>
+        <ul data-tap="list nav">
+          <li>Tap Me</li>
+          <li>Scroll Me</li>
+          <li>Tap Me</li>
+          <li>Scroll Me</li>
+        </ul>
+      </div>
+    </div>
+    <div id="list" class="inset"></div>
+    <div id="detail" class="inset"></div>
   </div>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js"></script>
   <script src="tappivate.js"></script>
 
   <script id="tmpl-list" type="text/html">
-    <h2>Try tapping & scrolling me.</h2>
+    <h2>I am a Regular List. Try tapping & scrolling me.</h2>
     <ul data-tap="list">
       <li>Tap Me</li>
       <li>Scroll Me</li>
@@ -117,6 +166,12 @@
       });
 
       $('#container').tappivate();
+
+      var $navlist = $('#navlist');
+
+      $('#navbar').on('tap longTap', function() {
+        $navlist.toggle();
+      });
 
       var $list = $('#list');
       var tmplList = $('#tmpl-list');
