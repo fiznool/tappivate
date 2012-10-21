@@ -133,6 +133,8 @@
       listHandler.touchend($(this));
     });
 
+    return this;
+
   };
 
 })( window.Zepto || window.jQuery, window, document );
